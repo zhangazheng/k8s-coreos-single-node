@@ -3,7 +3,7 @@
 IPMARKER="PUBLICIP"
 NODE_IP=$1
 KEYSDIR="$HOME/keys"
-K8SVERSION="v1.6.1_coreos.0"
+K8SVERSION="v1.3.4_coreos.0"
 echo "setting k8s in $NODE_IP"
 
 sudo mkdir -p /etc/systemd/system/etcd2.service.d
