@@ -53,6 +53,7 @@ sudo mv /tmp/kubelet.service  /etc/systemd/system/
 sed "s/PUBLICIP/$NODE_IP/g" files/kube-apiserver.yaml > /tmp/kube-apiserver.yaml
 sudo mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 
+sudo cp files/password.csv /etc/kubernetes/ssl
 sudo cp files/kube-proxy.yaml /etc/kubernetes/manifests/
 sudo cp files/kube-controller-manager.yaml /etc/kubernetes/manifests/
 sudo cp files/kube-scheduler.yaml /etc/kubernetes/manifests/
@@ -84,7 +85,7 @@ done
 #curl -s -H "Content-Type: application/json" -XPOST -d'{"apiVersion":"v1","kind":"Namespace","metadata":{"name":"kube-system"}}' "http://127.0.0.1:8080/api/v1/namespaces"
 
 echo "install kubectl"
-curl -s -O http://meteor-visual3d.oss-cn-beijing.aliyuncs.com/kubectl
+curl -s -L -O http://meteor-visual3d.oss-cn-beijing.aliyuncs.com/kubectl
 #curl -s -O https://storage.googleapis.com/kubernetes-release/release/v1.3.4/bin/linux/amd64/kubectl
 sudo mv kubectl /opt/bin
 sudo chmod +x /opt/bin/kubectl

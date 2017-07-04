@@ -7,7 +7,7 @@ spec:
   hostNetwork: true
   containers:
   - name: kube-apiserver
-    image: quay.io/coreos/hyperkube:v1.3.4_coreos.0
+    image: quay.io/coreos/hyperkube:v1.6.1_coreos.0
     command:
     - /hyperkube
     - apiserver
@@ -17,12 +17,13 @@ spec:
     - --service-cluster-ip-range=10.3.0.0/24
     - --secure-port=443
     - --advertise-address=PUBLICIP
-    - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota
+    - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ReaourceQuota
     - --tls-cert-file=/etc/kubernetes/ssl/apiserver.pem
     - --tls-private-key-file=/etc/kubernetes/ssl/apiserver-key.pem
     - --client-ca-file=/etc/kubernetes/ssl/ca.pem
     - --service-account-key-file=/etc/kubernetes/ssl/apiserver-key.pem
     - --runtime-config=extensions/v1beta1=true,extensions/v1beta1/networkpolicies=true
+    - --basic-auth-file=/etc/kubernetes/ssl/password.csv
     ports:
     - containerPort: 443
       hostPort: 443
