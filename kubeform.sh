@@ -53,6 +53,7 @@ sudo mv /tmp/kubelet.service  /etc/systemd/system/
 sed "s/PUBLICIP/$NODE_IP/g" files/kube-apiserver.yaml > /tmp/kube-apiserver.yaml
 sudo mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 
+sudo cp files/password.csv /etc/kubernetes/ssl
 sudo cp files/kube-proxy.yaml /etc/kubernetes/manifests/
 sudo cp files/kube-controller-manager.yaml /etc/kubernetes/manifests/
 sudo cp files/kube-scheduler.yaml /etc/kubernetes/manifests/
