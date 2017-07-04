@@ -3,8 +3,7 @@
 IPMARKER="PUBLICIP"
 NODE_IP=$1
 KEYSDIR="$HOME/keys"
-K8VERSION="v1.3.4_coreos.0"
-
+K8SVERSION="v1.6.1_coreos.0"
 echo "setting k8s in $NODE_IP"
 
 sudo mkdir -p /etc/systemd/system/etcd2.service.d
@@ -48,7 +47,7 @@ sed "s/PUBLICIP/$NODE_IP/g" files/options.env  > /tmp/options.env
 sudo mv /tmp/options.env  /etc/flannel/
 sudo cp  files/40-ExecStartPre-symlink.conf /etc/systemd/system/flanneld.service.d/
 
-sed "s/PUBLICIP/$NODE_IP/g" files/kubelet.service | sed "s/K8VERSION/$K8VERSION/g" > /tmp/kubelet.service
+sed "s/PUBLICIP/$NODE_IP/g" files/kubelet.service | sed "s/K8SVERSION/$K8SVERSION/g" > /tmp/kubelet.service
 sudo mv /tmp/kubelet.service  /etc/systemd/system/
 
 sed "s/PUBLICIP/$NODE_IP/g" files/kube-apiserver.yaml > /tmp/kube-apiserver.yaml
