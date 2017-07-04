@@ -8,6 +8,7 @@ echo "setting k8s in $NODE_IP"
 
 sudo mkdir -p /etc/systemd/system/etcd2.service.d
 sudo mkdir -p /etc/kubernetes/manifests
+sudo mkdir -p /etc/kubernetes/cni/net.d
 sudo mkdir -p /etc/kubernetes/ssl
 sudo mkdir -p /etc/flannel/
 sudo mkdir -p /etc/systemd/system/flanneld.service.d
@@ -57,6 +58,8 @@ sudo cp files/password.csv /etc/kubernetes/ssl
 sudo cp files/kube-proxy.yaml /etc/kubernetes/manifests/
 sudo cp files/kube-controller-manager.yaml /etc/kubernetes/manifests/
 sudo cp files/kube-scheduler.yaml /etc/kubernetes/manifests/
+sudo cp files/docker_opts_cni.env /etc/kubernetes/cni/
+sudo cp files/10-flannel.conf /etc/kubernetes/cni/net.d/
 
 sudo systemctl daemon-reload
 
@@ -85,7 +88,7 @@ done
 #curl -s -H "Content-Type: application/json" -XPOST -d'{"apiVersion":"v1","kind":"Namespace","metadata":{"name":"kube-system"}}' "http://127.0.0.1:8080/api/v1/namespaces"
 
 echo "install kubectl"
-curl -s -L -O http://meteor-visual3d.oss-cn-beijing.aliyuncs.com/kubectl
+curl -L -O http://meteor-visual3d.oss-cn-beijing.aliyuncs.com/kubectl
 #curl -s -O https://storage.googleapis.com/kubernetes-release/release/v1.3.4/bin/linux/amd64/kubectl
 sudo mv kubectl /opt/bin
 sudo chmod +x /opt/bin/kubectl
