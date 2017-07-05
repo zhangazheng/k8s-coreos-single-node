@@ -3,7 +3,7 @@
 IPMARKER="PUBLICIP"
 NODE_IP=$1
 KEYSDIR="$HOME/keys"
-K8SVERSION="v1.3.4_coreos.0"
+K8SVERSION="v1.6.1_coreos.0"
 echo "setting k8s in $NODE_IP"
 
 sudo mkdir -p /etc/systemd/system/etcd2.service.d
@@ -85,7 +85,7 @@ done
 #curl -s -H "Content-Type: application/json" -XPOST -d'{"apiVersion":"v1","kind":"Namespace","metadata":{"name":"kube-system"}}' "http://127.0.0.1:8080/api/v1/namespaces"
 
 echo "install kubectl"
-curl -s -O http://meteor-visual3d.oss-cn-beijing.aliyuncs.com/kubectl
+curl -L -O http://meteor-visual3d.oss-cn-beijing.aliyuncs.com/kubectl
 #curl -s -O https://storage.googleapis.com/kubernetes-release/release/v1.3.4/bin/linux/amd64/kubectl
 sudo mv kubectl /opt/bin
 sudo chmod +x /opt/bin/kubectl
@@ -96,5 +96,7 @@ kubectl config set-credentials default-admin --certificate-authority=$KEYSDIR/ca
 
 kubectl config set-context default-system --cluster=default-cluster --user=default-admin
 kubectl config use-context default-system
-kubectl create -f files/dns.yml
+kubectl create -f files/dns-v20.yml
+kubectl create -f files/kube-dashboard-rc.yaml
+kubectl create -f files/kube-dashboard-svc.yaml
 kubectl get pods --all-namespaces
