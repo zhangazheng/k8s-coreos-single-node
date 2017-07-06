@@ -99,4 +99,5 @@ kubectl config use-context default-system
 kubectl create -f files/dns-v20.yml
 kubectl create -f files/kube-dashboard-rc.yaml
 kubectl create -f files/kube-dashboard-svc.yaml
+kubectl create -f files/influxdb/
 kubectl get pods --all-namespaces
