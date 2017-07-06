@@ -89,6 +89,9 @@ curl -L -O http://meteor-visual3d.oss-cn-beijing.aliyuncs.com/kubectl
 #curl -s -O https://storage.googleapis.com/kubernetes-release/release/v1.3.4/bin/linux/amd64/kubectl
 sudo mv kubectl /opt/bin
 sudo chmod +x /opt/bin/kubectl
+echo "install make"
+sudo mv utils/make /opt/bin
+sudo chmod +x /opt/bin/make
 
 kubectl config set-cluster default-cluster --server=https://$NODE_IP --certificate-authority=$KEYSDIR/ca.pem 
 
