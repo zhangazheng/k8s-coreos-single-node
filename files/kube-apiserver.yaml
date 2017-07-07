@@ -15,7 +15,8 @@ spec:
     - --etcd-servers=http://PUBLICIP:2379
     - --allow-privileged=true
     - --service-cluster-ip-range=10.3.0.0/24
-    - --secure-port=443
+    - --insecure-port=8080
+    - --secure-port=6433
     - --advertise-address=PUBLICIP
     - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota
     - --tls-cert-file=/etc/kubernetes/ssl/apiserver.pem
@@ -26,8 +27,8 @@ spec:
     - --basic-auth-file=/etc/kubernetes/ssl/password.csv
     - --storage-backend=etcd2
     ports:
-    - containerPort: 443
-      hostPort: 443
+    - containerPort: 6433
+      hostPort: 6433
       name: https
     - containerPort: 8080
       hostPort: 8080
